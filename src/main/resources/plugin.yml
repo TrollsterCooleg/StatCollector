@@ -1,0 +1,11 @@
+name: StatCollector
+version: '${project.version}'
+main: me.cooleg.statcollector.StatCollector
+api-version: '1.18'
+commands:
+  savestats:
+    permission: statistics.save
+  togglecollecting:
+    permission: statistics.toggle
+  wipestats:
+    permission: statistics.wipe
