@@ -13,6 +13,7 @@ public class CollectStatistics {
 
     public static void collectStatistics(JavaPlugin plugin) {
         List<String> statistics = PlayerStatistics.getStatistics().stream().sorted().toList();
+        List<String> properties = PlayerStatistics.getProperties().stream().sorted().toList();
         HashMap<UUID, PlayerStatistics> statsMap = PlayerStatistics.getPlayers();
 
         File file = new File("plugins/StatCollector/stats.csv");
@@ -25,11 +26,15 @@ public class CollectStatistics {
                     if (file.exists()) {file.delete();}
                     file.createNewFile();
                     FileWriter write = new FileWriter(file);
-                    write.write("UUID,Username");
+                    write.write("UUID");
+                    for (String string : properties) {write.write(","+string);}
                     for (String string : statistics) {write.write("," + string);}
                     write.write('\n');
                     for (Map.Entry<UUID, PlayerStatistics> stats : statsMap.entrySet()) {
-                        write.write(stats.getKey().toString() + "," + Bukkit.getOfflinePlayer(stats.getKey()).getName());
+                        write.write(stats.getKey().toString());
+                        for (String property : properties) {
+                            write.write(","+stats.getValue().getProperty(property));
+                        }
                         for (String statistic : statistics) {
                             write.write(","+stats.getValue().getStatistic(statistic));
                         }

@@ -4,6 +4,7 @@ import me.cooleg.statcollector.commands.SaveToFile;
 import me.cooleg.statcollector.commands.ToggleCollecting;
 import me.cooleg.statcollector.commands.WipeStats;
 import me.cooleg.statcollector.defaultstatistics.*;
+import me.cooleg.statcollector.hooks.CommandAPIHook;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,6 +17,8 @@ public final class StatCollector extends JavaPlugin {
         getCommand("togglecollecting").setExecutor(new ToggleCollecting());
         getCommand("wipestats").setExecutor(new WipeStats());
         registerEvents();
+
+        if (Bukkit.getPluginManager().isPluginEnabled("CommandAPI")) {new CommandAPIHook().registerCommands();}
     }
 
     private void registerEvents() {

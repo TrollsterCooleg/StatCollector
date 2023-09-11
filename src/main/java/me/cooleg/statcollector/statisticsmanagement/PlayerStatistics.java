@@ -10,12 +10,16 @@ public class PlayerStatistics {
 
     private static final HashMap<UUID, PlayerStatistics> players = new HashMap<>();
     private static final HashSet<String> allStatistics = new HashSet<>();
+    private static final HashSet<String> allProperties = new HashSet<>();
     private static boolean collect = false;
+
     private final HashMap<String, Double> statisticsStorage = new HashMap<>();
+    private final HashMap<String, String> propertyStorage = new HashMap<>();
     private final UUID id;
 
     private PlayerStatistics(UUID id) {
         this.id = id;
+        setProperty("Username", Bukkit.getOfflinePlayer(id).getName());
         players.put(id, this);
     }
 
@@ -56,6 +60,17 @@ public class PlayerStatistics {
         addStatistic(stat.getName(), num);
     }
 
+    public void setProperty(String property, String value) {
+        allProperties.add(property);
+        propertyStorage.put(property, value);
+    }
+
+    public String getProperty(String property) {
+        String value = propertyStorage.get(property);
+        return value != null ? value : "NONE";
+    }
+
+    public HashMap<String, String> getPropertyValues() {return propertyStorage;}
     public UUID getId() {return id;}
 
     public static HashMap<UUID, PlayerStatistics> getPlayers() {
@@ -65,8 +80,12 @@ public class PlayerStatistics {
         return allStatistics;
     }
 
+    public static HashSet<String> getProperties() {
+        return allProperties;
+    }
+
     public static boolean getCollecting() {return collect;}
     public static void setCollecting(boolean collecting) {collect = collecting;}
-    public static void clearStatistics() {players.clear(); allStatistics.clear();}
+    public static void clearStatistics() {players.clear(); allStatistics.clear(); allProperties.clear();}
 
 }

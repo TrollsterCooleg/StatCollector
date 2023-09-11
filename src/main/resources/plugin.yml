@@ -2,6 +2,8 @@ name: StatCollector
 version: '${project.version}'
 main: me.cooleg.statcollector.StatCollector
 api-version: '1.18'
+softdepend:
+  - CommandAPI
 commands:
   savestats:
     permission: statistics.save
