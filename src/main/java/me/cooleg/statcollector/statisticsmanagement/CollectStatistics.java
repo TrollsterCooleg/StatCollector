@@ -25,11 +25,11 @@ public class CollectStatistics {
                     if (file.exists()) {file.delete();}
                     file.createNewFile();
                     FileWriter write = new FileWriter(file);
-                    write.write("UUID");
+                    write.write("UUID,Username");
                     for (String string : statistics) {write.write("," + string);}
                     write.write('\n');
                     for (Map.Entry<UUID, PlayerStatistics> stats : statsMap.entrySet()) {
-                        write.write(stats.getKey().toString());
+                        write.write(stats.getKey().toString() + "," + Bukkit.getOfflinePlayer(stats.getKey()).getName());
                         for (String statistic : statistics) {
                             write.write(","+stats.getValue().getStatistic(statistic));
                         }
