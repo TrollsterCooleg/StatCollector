@@ -10,6 +10,9 @@ public class DamageTakenStatistic implements Statistic {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void damageTaken(EntityDamageEvent event) {
+        // Honestly if someone does take 1 billion damage in one hit without
+        // getting /killed I give up they can just not have it count
+        if (event.getFinalDamage() > 1000000000) {return;}
         if (!(event.getEntity() instanceof Player player)) {return;}
         addStatistic(player.getUniqueId(), event.getFinalDamage());
     }
