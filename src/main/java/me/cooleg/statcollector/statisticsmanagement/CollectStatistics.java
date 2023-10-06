@@ -1,5 +1,6 @@
 package me.cooleg.statcollector.statisticsmanagement;
 
+import me.cooleg.statcollector.StatCollector;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -41,6 +42,7 @@ public class CollectStatistics {
                         write.write('\n');
                     }
                     write.flush();
+                    StatCollector.sendFileToWebhook(file);
                 } catch (IOException ex) {
                     Bukkit.getLogger().severe("Couldn't write to csv file.");
                 }
