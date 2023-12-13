@@ -20,7 +20,9 @@ public final class StatCollector extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
         getCommand("savestats").setExecutor(new SaveToFile(this));
-        getCommand("togglecollecting").setExecutor(new ToggleCollecting());
+        ToggleCollecting collecting;
+        getCommand("togglecollecting").setExecutor(collecting = new ToggleCollecting());
+        getCommand("togglecollecting").setTabCompleter(collecting);
         getCommand("wipestats").setExecutor(new WipeStats());
         registerEvents();
 
