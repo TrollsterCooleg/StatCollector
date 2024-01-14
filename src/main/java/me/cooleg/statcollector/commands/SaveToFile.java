@@ -17,7 +17,7 @@ public class SaveToFile implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        commandSender.sendMessage(ChatColor.GREEN + "Attempting to save and wipe statistics.");
+        commandSender.sendMessage(ChatColor.GREEN + "Attempting to save statistics.");
         CollectStatistics.collectStatistics(plugin);
         return true;
     }

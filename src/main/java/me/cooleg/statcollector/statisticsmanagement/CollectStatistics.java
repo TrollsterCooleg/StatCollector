@@ -46,8 +46,6 @@ public class CollectStatistics {
                 } catch (IOException ex) {
                     Bukkit.getLogger().severe("Couldn't write to csv file.");
                 }
-
-                PlayerStatistics.clearStatistics();
             }
         }.runTaskAsynchronously(plugin);
     }
