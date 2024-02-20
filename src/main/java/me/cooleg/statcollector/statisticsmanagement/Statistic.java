@@ -2,6 +2,8 @@ package me.cooleg.statcollector.statisticsmanagement;
 
 import org.bukkit.event.Listener;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public interface Statistic extends Listener {
@@ -25,6 +27,16 @@ public interface Statistic extends Listener {
 
     default void incrementStatistic(UUID id) {
         addStatistic(id, 1);
+    }
+
+    default Map<UUID, Double> getAllScores() {
+        HashMap<UUID, Double> scores = new HashMap<>();
+
+        for (Map.Entry<UUID, PlayerStatistics> entries : PlayerStatistics.getPlayers().entrySet()) {
+            scores.put(entries.getKey(), entries.getValue().getStatistic(this));
+        }
+
+        return scores;
     }
 
 }
