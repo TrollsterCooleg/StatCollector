@@ -19,6 +19,7 @@ public final class StatCollector extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        PluginStateManager.initializeManager(this);
         getCommand("savestats").setExecutor(new SaveToFile(this));
         ToggleCollecting collecting;
         getCommand("togglecollecting").setExecutor(collecting = new ToggleCollecting());
